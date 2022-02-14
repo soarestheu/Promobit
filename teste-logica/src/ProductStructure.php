@@ -20,9 +20,9 @@ class ProductStructure
 
     public function explodeData(): array
     {
-        for($i=0; $i<count(self::products); $i++){
-            $newVar = explode("-", self::products[$i]);
-            $camisa[$newVar[0]][$i] = $newVar[1];
+        foreach(self::products as $i => $product){
+            $produto = explode("-", $product);
+            $camisa[$produto[0]][$i] = $produto[1];
         }
 
         return $camisa;
@@ -30,20 +30,12 @@ class ProductStructure
 
     public function orderProducts($camisa): array
     {
-        $valorAnterior =0; $novaCamisa = array();
+        $novaCamisa = array();
         foreach($camisa as $cor => $tamanhos){
-            foreach($tamanhos as $key => $tamanho){
-                if(!isset($novaCamisa[$cor][$tamanho])){
-                    $novaCamisa[$cor][$tamanho] = 0;
-                }
+            foreach($tamanhos as $tamanho){
+                if(!isset($novaCamisa[$cor][$tamanho])) $novaCamisa[$cor][$tamanho] = 0;
 
-                if($tamanho == $valorAnterior){
-                    $novaCamisa[$cor][$tamanho] += 1;
-                }else{
-                    $novaCamisa[$cor][$tamanho] += 1;
-                }
-
-                $valorAnterior = $tamanho;
+                $novaCamisa[$cor][$tamanho] += 1;
             }
         }
 
@@ -52,6 +44,6 @@ class ProductStructure
     
     public function make(): array
     {
-        return $this->orderProducts($this->explodeData());;
+        return $this->orderProducts($this->explodeData());
     }
 }
