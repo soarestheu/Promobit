@@ -1,7 +1,7 @@
 <template>
     <div id="navBar">
         <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <router-link to="/" class="navbar-brand">Inicio</router-link>
+            <router-link to="/user/list" class="navbar-brand">Inicio</router-link>
             <div v-if="Logado"  class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">

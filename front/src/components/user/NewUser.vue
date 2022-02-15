@@ -2,7 +2,7 @@
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
-        <label for="name">Nome completo:</label>
+        <label @click="showToast()" for="name">Nome completo:</label>
         <input
           type="text"
           class="form-control"
@@ -54,9 +54,15 @@
 
 <script>
 import CRUDDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
   name: "novo-usuario",
+  setup() {
+      // Pegando a interface do  toast
+      const toast = useToast();
+      return { toast }
+  },
   data() {
     return {
       user: {
@@ -76,8 +82,11 @@ export default {
         password: this.user.password
       };
 
-      CRUDDataService.create(data)
+      CRUDDataService.create('user', data)
         .then(response => {
+          this.toast.success(response.data['success'],{
+            timeout: 2000
+          });
           this.user.id = response.data.id;
           this.submitted = true;
         })

@@ -3,6 +3,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import navBar from "@/components/NavBar.vue";
+import Toast from "vue-toastification";
+
+import "vue-toastification/dist/index.css";
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -28,6 +31,7 @@ library.add(faIdBadge)
 
 
 createApp(App)
+    .use(Toast)
     .use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
     .component('nav-bar', navBar)

@@ -40,9 +40,15 @@
 
 <script>
 import CrudDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
   name: "user",
+  setup() {
+      // Pegando a interface do  toast
+      const toast = useToast();
+      return { toast }
+  },
   data() {
     return {
       currentUser: null,
@@ -50,8 +56,9 @@ export default {
   },
   methods: {
     getUser(id) {
-      CrudDataService.get(id)
+      CrudDataService.get('user', id)
         .then(response => {
+          console.log(response.data);
           this.currentUser = response.data;
         })
         .catch(e => {
@@ -60,7 +67,7 @@ export default {
     },
 
     updateUser() {
-      CrudDataService.update(this.currentUser.id, this.currentUser)
+      CrudDataService.update('user', this.currentUser.id, this.currentUser)
         .then(response => {
           alert(response.data.sucess)
           this.$router
@@ -74,12 +81,15 @@ export default {
     },
 
     deleteUser() {
-      CrudDataService.delete(this.currentUser.id)
+      CrudDataService.delete('user', this.currentUser.id)
         .then(response => {
-          alert(response.data.sucess)
+          console.log(response.data)
+          this.toast.success(response.data['sucess'],{
+            timeout: 2000
+          });
           this.$router.replace({
-                            name: 'list',
-                        });
+              name: 'user-list',
+          });
         })
         .catch(e => {
           console.log(e);
