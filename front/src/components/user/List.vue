@@ -34,7 +34,7 @@
           &nbsp;
     </div>
     <div class="row col-md-6">
-          <router-link to="/novo" class="btn btn-primary">
+          <router-link to="/user/new" class="btn btn-primary">
             Cadasatrar Usuário 
             <font-awesome-icon icon="user-plus" />
           </router-link>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\ProductTag;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,13 @@ class TagController extends Controller
     {
         //
         $tag = Tag::all();
-
+        for($i=0; $i<count($tag); $i++){
+            $tagProduto = ProductTag::where('tag_id', $tag[$i]->id)->get();
+            foreach($tagProduto as $index => $tp){
+                $product[$index] = Product::find($tp->product_id);
+                $tag[$i]->products = $product;
+            }
+        }
         return $tag;
     }
 

@@ -9,20 +9,20 @@ class CrudDataService {
         return http.get("/" + type);
     }
 
-    get(id) {
-        return http.get(`/user/${id}`);
+    get(type, id) {
+        return http.get(`/${type}/${id}`);
     }
 
     create(type, data) {
         return http.post("/" + type, data);
     }
 
-    update(id, data) {
-        return http.put(`/user/${id}`, data);
+    update(type, id, data) {
+        return http.put(`/${type}/${id}`, data);
     }
 
-    delete(id) {
-        return http.delete(`/user/${id}`);
+    delete(type, id) {
+        return http.delete(`/${type}/${id}`);
     }
 
     logout() {
@@ -31,6 +31,10 @@ class CrudDataService {
 
     validatedToken() {
         return http.get('me');
+    }
+
+    verifyTag(data) {
+        return http.post('/product/verify', data);
     }
 }
 

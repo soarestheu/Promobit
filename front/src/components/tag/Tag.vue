@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     getTag(id) {
-      CrudDataService.get(id)
+      CrudDataService.get('tag', id)
         .then(response => {
           this.currentTag = response.data;
         })
@@ -53,13 +53,13 @@ export default {
         });
     },
 
-    updateUser() {
-      CrudDataService.update(this.currentTag.id, this.currentTag)
+    updateTag() {
+      CrudDataService.update('tag', this.currentTag.id, this.currentTag)
         .then(response => {
           alert(response.data.sucess)
           this.$router
                 .replace({
-                  name: 'list',
+                  name: 'tag-list',
                 });
         })
         .catch(e => {
@@ -67,13 +67,13 @@ export default {
         });
     },
 
-    deleteUser() {
-      CrudDataService.delete(this.currentUser.id)
+    deleteTag() {
+      CrudDataService.delete(this.currentTag.id)
         .then(response => {
           alert(response.data.sucess)
           this.$router.replace({
-                            name: 'list',
-                        });
+              name: 'tag-list',
+          });
         })
         .catch(e => {
           console.log(e);
@@ -82,7 +82,7 @@ export default {
   },
   mounted() {
     this.message = '';
-    this.getUser(this.$route.params.id);
+    this.getTag(this.$route.params.id);
   }
 };
 </script>

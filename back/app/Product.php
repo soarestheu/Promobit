@@ -9,7 +9,12 @@ class Product extends Model
     //
     protected $table = "product";
 
-    protected $fillable = [
+    public $fillable = [
         'name'
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

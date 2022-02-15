@@ -16,7 +16,7 @@
       </div>
 
     </form>
-    <router-link  to="/list"><font-awesome-icon icon="arrow-left" /></router-link>
+    <router-link  to="/user/list"><font-awesome-icon icon="arrow-left" /></router-link>
       &nbsp; 
     <button class="badge badge-danger mr-2"
       @click="deleteUser"
@@ -34,7 +34,7 @@
 
   <div v-else>
     <br />
-    <router-link  to="/list"><font-awesome-icon icon="arrow-left" /></router-link>
+    <router-link  to="/user/list"><font-awesome-icon icon="arrow-left" /></router-link>
   </div>
 </template>
 

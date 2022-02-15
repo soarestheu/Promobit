@@ -36,7 +36,7 @@
         />
       </div>
 
-      <router-link class="btn btn-warning " to="/list">Voltar</router-link>
+      <router-link class="btn btn-warning " to="/user/list">Voltar</router-link>
       &nbsp;
       <button @click="saveUser" class="btn btn-success">Cadastrar</button>
       
@@ -45,7 +45,7 @@
 
     <div v-else>
       <h4>Usuário cadastrado com sucesso!</h4>
-          <router-link class="btn btn-warning" to="/list">Voltar</router-link>
+          <router-link class="btn btn-warning" to="/user/list">Voltar</router-link>
 
       <button class="btn btn-success" @click="newUser">Criar Novo</button>
     </div>

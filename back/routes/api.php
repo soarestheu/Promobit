@@ -23,6 +23,7 @@ Route::group(['prefix' => 'base'], function(){
     
     Route::group(['middleware' => ['apiJwt']], function(){
         Route::get('me', "AuthController@me");
+        Route::post('/product/verify', "ProductController@verifyTag");
         Route::resource("user", "UserController");
         Route::resource("product", "ProductController");
         Route::resource("tag", "TagController");

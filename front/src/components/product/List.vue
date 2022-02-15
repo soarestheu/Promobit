@@ -8,25 +8,26 @@
         <ul class="list-group">
           <li class="list-group-item"
             :class="{ active: index == currentIndex }"
-            v-for="(user, index) in users"
+            v-for="(product, index) in products"
             :key="index"
-            @click="setActiveUser(user, index)"
+            @click="setActiveProduct(product, index)"
           >
-            {{ user.name }} 
+            {{ product.name }} 
           </li>
         </ul>
       </div>
       <div class="col-md-6">
-        <div v-if="currentUser">
-          <h4>Usuário</h4>
+        <div v-if="currentProduct">
+          <h4>Produto</h4>
           <div>
-            <label><strong>Nome:</strong></label> {{ currentUser.name }}
-          </div>
-          <div>
-            <label><strong>E-mail:</strong></label> {{ currentUser.email }}
+            <label><strong>Nome:</strong></label> {{ currentProduct.name }} <br/>
+            <label> <strong>Tags:</strong></label>
+            <div v-for="tag in currentProduct.tag" :key="tag.id">
+              <li style="margin-left:10%;"> {{tag.name}} </li>
+            </div>
           </div>
 
-          <router-link :to="'/user/' + currentUser.id" class="badge badge-warning">Editar <font-awesome-icon icon="user-edit" /></router-link>
+          <router-link :to="'/product/' + currentProduct.id" class="badge badge-warning">Editar <font-awesome-icon icon="user-edit" /></router-link>
         </div>
       </div>
     </div>
@@ -34,8 +35,8 @@
           &nbsp;
     </div>
     <div class="row col-md-6">
-          <router-link to="/novo" class="btn btn-primary">
-            Cadasatrar Usuário 
+          <router-link to="/product/new" class="btn btn-primary">
+            Cadasatrar Produto 
             <font-awesome-icon icon="user-plus" />
           </router-link>
     </div>
@@ -49,38 +50,37 @@ export default {
   name: "list",
   data() {
     return {
-      users: [],
-      currentUser: null,
+      products: [],
+      currentProduct: null,
       currentIndex: -1,
       name: "",
     };
   },
   methods: {
-    getUsers() {
+    getProducts() {
       CrudDataService.getAll("product")
         .then(response => {
           console.log(response.data);
-          this.users = response.data;
+          this.products = response.data;
         })
         .catch(e => {
           console.log(e);
         });
     },
-
     refreshList() {
-      this.getUsers();
-      this.currentUser = null;
+      this.getProducts();
+      this.currentProduct = null;
       this.currentIndex = -1;
     },
 
-    setActiveUser(user, index) {
-      this.currentUser = user;
-      this.currentIndex = user ? index : -1;
+    setActiveProduct(product, index) {
+      this.currentProduct = product;
+      this.currentIndex = product ? index : -1;
     },
 
   },
   mounted() {
-    this.getUsers();
+    this.getProducts();
   }
 };
 </script>

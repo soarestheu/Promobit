@@ -8,10 +8,12 @@
                         Tags
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Listar</a>
-                        <a class="dropdown-item" href="#">Cadastro de Produtos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <li class="nav-item">
+                            <router-link to="/tag/list" style="color:black;" class="nav-link">Listar</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/tag/new" style="color:black;" class="nav-link">Cadasatro de Tag</router-link>
+                        </li>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -19,10 +21,12 @@
                     Produtos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Listar</a>
-                        <a class="dropdown-item" href="#">Cadastro de Produtos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <li class="nav-item">
+                            <router-link to="/product/list" style="color:black;" class="nav-link">Listar</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/product/new" style="color:black;" class="nav-link">Cadastro de Produtos</router-link>
+                        </li>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -34,7 +38,7 @@
                             <router-link to="/user/list" style="color:black;" class="nav-link">Listar</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/user/novo" style="color:black;" class="nav-link">Cadasatrar Usuário</router-link>
+                            <router-link to="/user/new" style="color:black;" class="nav-link">Cadasatro de Usuário</router-link>
                         </li>
                     </div>
                 </li>

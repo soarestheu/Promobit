@@ -21,6 +21,13 @@
           <h4>Tag</h4>
           <div>
             <label><strong>Nome:</strong></label> {{ currentTag.name }}
+            <br/>
+            <label><strong>Produtos:</strong></label>
+            <div v-for="product in currentTag.products" :key="product.id">
+              <li>
+                {{product.name}}
+              </li>
+            </div>
           </div>
           <router-link :to="'/tag/' + currentTag.id" class="badge badge-warning">Editar <font-awesome-icon icon="user-edit" /></router-link>
         </div>
@@ -30,7 +37,7 @@
           &nbsp;
     </div>
     <div class="row col-md-6">
-          <router-link to="/novo" class="btn btn-primary">
+          <router-link to="/tag/new" class="btn btn-primary">
             Cadasatrar Tag 
             <font-awesome-icon icon="user-plus" />
           </router-link>

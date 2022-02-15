@@ -17,7 +17,7 @@ const routes = [{
     },
     {
         path: "/user/list",
-        name: "list",
+        name: "user-list",
         beforeEnter: Login.auth,
         component: () =>
             import ("./components/user/List")
@@ -35,12 +35,12 @@ const routes = [{
         name: "new-user",
         beforeEnter: Login.auth,
         component: () =>
-            import ("./components/user/NovoUser")
+            import ("./components/user/NewUser")
     },
 
     {
         path: "/tag/list",
-        name: "list",
+        name: "tag-list",
         beforeEnter: Login.auth,
         component: () =>
             import ("./components/tag/List")
@@ -54,11 +54,34 @@ const routes = [{
             import ("./components/tag/Tag")
     },
     {
-        path: "/tag/novo",
+        path: "/tag/new",
         name: "new-tag",
         beforeEnter: Login.auth,
         component: () =>
             import ("./components/tag/NewTag")
+    },
+
+    {
+        path: "/product/list",
+        name: "product-list",
+        beforeEnter: Login.auth,
+        component: () =>
+            import ("./components/product/List")
+
+    },
+    {
+        path: "/product/:id",
+        name: "product-detail",
+        beforeEnter: Login.auth,
+        component: () =>
+            import ("./components/product/Product")
+    },
+    {
+        path: "/product/new",
+        name: "new-product",
+        beforeEnter: Login.auth,
+        component: () =>
+            import ("./components/product/NewProduct")
     },
 ];
 
