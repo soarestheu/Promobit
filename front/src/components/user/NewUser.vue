@@ -2,7 +2,7 @@
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
-        <label @click="showToast()" for="name">Nome completo:</label>
+        <label for="name">Nome completo:</label>
         <input
           type="text"
           class="form-control"
@@ -91,7 +91,9 @@ export default {
           this.submitted = true;
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+              timeout: 2000
+          });
         });
     },
     

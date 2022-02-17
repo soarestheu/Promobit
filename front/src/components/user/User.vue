@@ -62,29 +62,34 @@ export default {
           this.currentUser = response.data;
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
 
     updateUser() {
       CrudDataService.update('user', this.currentUser.id, this.currentUser)
         .then(response => {
-          alert(response.data.sucess)
+          this.toast.success(response.data['success'],{
+            timeout: 2000
+          });
           this.$router
                 .replace({
-                  name: 'list',
+                  name: 'user-list',
                 });
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
 
     deleteUser() {
       CrudDataService.delete('user', this.currentUser.id)
         .then(response => {
-          console.log(response.data)
-          this.toast.success(response.data['sucess'],{
+          this.toast.success(response.data['success'],{
             timeout: 2000
           });
           this.$router.replace({
@@ -92,7 +97,9 @@ export default {
           });
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     }
   },

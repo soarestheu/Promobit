@@ -38,9 +38,16 @@
 <script>
 import Cookie from "js-cookie";
 import CRUDDataService from "../services/CrudDataService";
+import { useToast } from "vue-toastification";
+
 
 export default {
     name: "app",
+    setup() {
+        // Pegando a interface do  toast
+        const toast = useToast();
+        return { toast }
+    },
     data() {
         return {
             user: {
@@ -61,7 +68,9 @@ export default {
             };
             CRUDDataService.login(this.data)
                     .then(response =>   {
-                        console.log(response.data);
+                        this.toast.success("Login realizado com sucesso!",{
+                            timeout: 2000
+                        });
 
                         Cookie.set("Crud_token", response.data.access_token);
                         this.submitted = true;

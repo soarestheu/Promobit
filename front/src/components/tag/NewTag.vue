@@ -31,9 +31,15 @@
 
 <script>
 import CRUDDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
   name: "nova-tag",
+  setup() {
+    // Pegando a interface do  toast
+    const toast = useToast();
+    return { toast }
+  },
   data() {
     return {
       tag: {
@@ -51,6 +57,9 @@ export default {
 
       CRUDDataService.create("tag", data)
         .then(response => {
+          this.toast.success(response.data['success'],{
+              timeout: 2000
+          });
           this.tag.id = response.data.id;
           this.submitted = true;
         })

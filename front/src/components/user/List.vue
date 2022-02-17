@@ -63,7 +63,9 @@ export default {
           this.users = response.data;
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+              timeout: 2000
+          });
         });
     },
 

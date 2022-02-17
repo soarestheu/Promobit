@@ -69,7 +69,7 @@ class UserController extends Controller
         $user = User::where('id', $id)->update($data);
 
         if($user){
-            return response()->json(["sucess" => "Usuário atualizado com sucesso"]);
+            return response()->json(["success" => "Usuário atualizado com sucesso"]);
         }else{
             return response()->json(["error" => "Erro ao atualizar usuário"]);
         }
@@ -85,7 +85,7 @@ class UserController extends Controller
     {
         //
         if( User::where("id", $id)->delete() ) {
-            return response()->json(["sucess" => "Usuário deletado com sucesso"]);
+            return response()->json(["success" => "Usuário deletado com sucesso"]);
         }else{
             return response()->json(["error" => "Erro ao deletar usuário"]);
         }

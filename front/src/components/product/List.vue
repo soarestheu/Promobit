@@ -45,9 +45,15 @@
 
 <script>
 import CrudDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
-  name: "list",
+  name: "product-list",
+  setup() {
+    // Pegando a interface do  toast
+    const toast = useToast();
+    return { toast }
+  },
   data() {
     return {
       products: [],
@@ -64,7 +70,9 @@ export default {
           this.products = response.data;
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
     refreshList() {

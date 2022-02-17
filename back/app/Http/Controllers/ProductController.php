@@ -46,7 +46,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $product = new Product();
         $product->name = $request->name;
 
@@ -57,9 +56,9 @@ class ProductController extends Controller
                 $productTag->tag_id = $request->tags[$i];
                 $productTag->save();
             }
-            return response()->json(["success" => "Tag criada com sucesso"]);
+            return response()->json(["success" => "Produto criado com sucesso"]);
         }else{
-            return response()->json(["error" => "Erro ao criar tag"]);
+            return response()->json(["error" => "Erro ao criar produto."]);
         }
     }
 
@@ -73,6 +72,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->tag = ProductTag::where('product_id', $id)->get();
+        
         return $product;
     }
 
@@ -107,7 +107,7 @@ class ProductController extends Controller
                 $productTag->tag_id = $request->tag[$i];
                 $productTag->save();
             }
-            return response()->json(["sucess" => "Produto atualizado com sucesso"]);
+            return response()->json(["success" => "Produto atualizado com sucesso"]);
         }else{
             return response()->json(["error" => "Erro ao atualizar produto"]);
         }
@@ -121,12 +121,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
-        if( Product::where('id', $id)->delete() ){
-            return response()->json(["success" => "Produto deletado com sucesso"]);
-        }else{
-            return response()->json(["error" => "Erro ao deletar produto"]);
+        if(ProductTag::where("product_id", $id)->delete()){
+            if( Product::where('id', $id)->delete() ){
+                return response()->json(["success" => "Produto deletado com sucesso"]);
+            }else{
+                return response()->json(["error" => "Erro ao deletar produto"]);
+            }
         }
+        
     }
 
     public function verifyTag(Request $request)

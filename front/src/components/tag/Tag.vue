@@ -34,9 +34,16 @@
 
 <script>
 import CrudDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
+  
   name: "tag",
+  setup() {
+    // Pegando a interface do  toast
+    const toast = useToast();
+    return { toast }
+  },
   data() {
     return {
       currentTag: null,
@@ -56,27 +63,35 @@ export default {
     updateTag() {
       CrudDataService.update('tag', this.currentTag.id, this.currentTag)
         .then(response => {
-          alert(response.data.sucess)
+          this.toast.success(response.data['success'],{
+            timeout: 2000
+          });
           this.$router
                 .replace({
                   name: 'tag-list',
                 });
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
 
     deleteTag() {
-      CrudDataService.delete(this.currentTag.id)
+      CrudDataService.delete('tag', this.currentTag.id)
         .then(response => {
-          alert(response.data.sucess)
+          this.toast.success(response.data['success'],{
+            timeout: 2000
+          });
           this.$router.replace({
               name: 'tag-list',
           });
         })
-        .catch(e => {
-          console.log(e);
+        .catch(() => {
+          this.toast.error("Erro ao excluir a tag, exclua todos os produtos associados a ela e tente novamente!",{
+            timeout: 2000
+          });
         });
     }
   },

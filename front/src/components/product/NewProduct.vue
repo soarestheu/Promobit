@@ -38,9 +38,15 @@
 
 <script>
 import CRUDDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
-  name: "novo-produto",
+  name: "new-product",
+  setup() {
+    // Pegando a interface do  toast
+    const toast = useToast();
+    return { toast }
+  },
   data() {
     return {
       product: {
@@ -67,7 +73,9 @@ export default {
 
       CRUDDataService.create('product', data)
         .then(response => {
-          console.log(response.data);
+          this.toast.success(response.data['success'],{
+              timeout: 2000
+          });
           this.product.id = response.data.id;
           this.submitted = true;
         })

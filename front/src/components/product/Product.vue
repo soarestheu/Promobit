@@ -41,9 +41,15 @@
 
 <script>
 import CrudDataService from "../../services/CrudDataService";
+import { useToast } from "vue-toastification";
 
 export default {
   name: "product",
+  setup() {
+    // Pegando a interface do  toast
+    const toast = useToast();
+    return { toast }
+  },
   data() {
     return {
       currentProduct: null,
@@ -55,44 +61,59 @@ export default {
     getProduct(id) {
       CrudDataService.get('product', id)
         .then(response => {
-          console.log(response.data);
           this.currentProduct = response.data;
+          console.log(this.currentProduct.tag);
+          // this.nTags = this.currentProduct.tag;
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
     getTags() {
       CrudDataService.getAll('tag')
-      .then(response => {
-        this.tags = response.data;
-      })
+        .then(response => {
+          this.tags = response.data;
+        })
+        .catch(e => {
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
+        });
     },
     updateProduct() {
       this.currentProduct.tag = this.nTags;
       CrudDataService.update('product', this.currentProduct.id, this.currentProduct)
         .then(response => {
-          console.log(response.data)
-          this.$router
-                .replace({
+         this.toast.success(response.data['success'],{
+              timeout: 2000
+          });
+          this.$router.replace({
                   name: 'product-list',
                 });
         })
         .catch(e => {
-          console.log(e);
+          this.toast.error(e.message,{
+            timeout: 2000
+          });
         });
     },
 
     deleteProduct() {
       CrudDataService.delete('product', this.currentProduct.id)
         .then(response => {
-          alert(response.data.sucess)
+          this.toast.success(response.data['success'],{
+              timeout: 2000
+          });
           this.$router.replace({
             name: 'product-list',
           });
         })
-        .catch(e => {
-          console.log(e);
+        .catch(() => {
+          this.toast.error("Erro ao excluir produto, entre em contato com o Adm",{
+            timeout: 2000
+          });
         });
     }
   },
