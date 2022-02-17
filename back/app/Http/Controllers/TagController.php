@@ -19,13 +19,19 @@ class TagController extends Controller
         //
         $tag = Tag::all();
         for($i=0; $i<count($tag); $i++){
-            $tagProduto = ProductTag::where('tag_id', $tag[$i]->id)->get();
-            foreach($tagProduto as $index => $tp){
-                $product[$index] = Product::find($tp->product_id);
-                $tag[$i]->products = $product;
-            }
+            $tag[$i]->product = $this->getProductByTag($tag[$i]->id);;
         }
+        
         return $tag;
+    }
+
+    public function getProductByTag($tagId)
+    {
+        $tagProduto = ProductTag::where('tag_id', $tagId)->get();
+        for($i=0; $i<count($tagProduto); $i++){
+            $product[] = Product::where('id', $tagProduto[$i]->product_id)->select('name')->get();
+        }
+        return $product;
     }
 
     /**

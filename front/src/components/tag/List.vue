@@ -23,10 +23,12 @@
             <label><strong>Nome:</strong></label> {{ currentTag.name }}
             <br/>
             <label><strong>Produtos:</strong></label>
-            <div v-for="product in currentTag.products" :key="product.id">
-              <li>
-                {{product.name}}
-              </li>
+            <div v-for="product in currentTag.product" :key="product.id">
+              <div v-for="name in product" :key="name.id">
+                <li>
+                  {{name.name}}
+                </li>
+              </div>
             </div>
           </div>
           <router-link :to="'/tag/' + currentTag.id" class="badge badge-warning">Editar <font-awesome-icon icon="user-edit" /></router-link>

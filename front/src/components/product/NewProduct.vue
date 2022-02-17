@@ -15,7 +15,7 @@
 
         <div v-for="tag in tags" :key="tag.id">
             <div class="form-group">
-                <input class="rounded border-gray-300" type="checkbox" name="newTags[]" v-model="product.newTags" :value="tag.id" />
+                <input class="rounded border-gray-300" type="checkbox" v-model="product.newTags" :value="tag.id" />
                 <label class="pl-3 block text-sm">{{ tag.name }}</label>
             </div>
         </div>
@@ -78,6 +78,9 @@ export default {
           });
           this.product.id = response.data.id;
           this.submitted = true;
+          this.$router.replace({
+                  name: 'product-list',
+                });
         })
         .catch(e => {
           console.log(e);
