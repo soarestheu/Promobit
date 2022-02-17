@@ -43,6 +43,11 @@
             Cadasatrar Tag 
             <font-awesome-icon icon="user-plus" />
           </router-link>
+
+          <div class="clean">&nbsp;</div>
+          <button v-if="tags" @click="exportart()" class="btn btn-warning float-right">
+            Exportar
+          </button>
     </div>
   </div>
 </template>
@@ -61,6 +66,13 @@ export default {
     };
   },
   methods: {
+    exportart() {
+        CrudDataService.exportart()
+            .then(response => {
+                console.log(response.data);
+                window.open("http://promobitapi.test" + response.data, '_blank');
+            });
+    },
     getTags() {
       CrudDataService.getAll("tag")
         .then(response => {

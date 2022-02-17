@@ -42,9 +42,6 @@
                         </li>
                     </div>
                 </li>
-                <li @click="exportart()" class="nav-item navbar-text">
-                    Exportar
-                </li>
             </div>
            
             <li v-if="Logado" class="nav-item navbar-text logout">
@@ -66,13 +63,6 @@ import Cookie from "js-cookie";
             }
         },
         methods: {
-            exportart() {
-                CRUDDataService.exportart()
-                    .then(response => {
-                        console.log(response.data);
-                        window.open("http://promobitapi.test" + response.data, '_blank');
-                    });
-            },
             logout() {
                 CRUDDataService.logout()
                 .then(response =>{
