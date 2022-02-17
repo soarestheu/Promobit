@@ -36,6 +36,10 @@ class CrudDataService {
     verifyTag(data) {
         return http.post('/product/verify', data);
     }
+
+    exportart() {
+        return http.get('/exportar');
+    }
 }
 
 export default new CrudDataService();

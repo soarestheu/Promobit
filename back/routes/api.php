@@ -20,7 +20,8 @@ Route::group(['prefix' => 'base'], function(){
     });
     
     Route::post('auth/login', 'AuthController@login');
-    
+    Route::get('/exportar', 'TagController@getDownload');
+
     Route::group(['middleware' => ['apiJwt']], function(){
         Route::get('me', "AuthController@me");
         Route::post('/product/verify', "ProductController@verifyTag");

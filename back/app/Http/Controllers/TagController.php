@@ -6,6 +6,8 @@ use App\Product;
 use App\ProductTag;
 use App\Tag;
 use Illuminate\Http\Request;
+use PDF;
+use Storage;
 
 class TagController extends Controller
 {
@@ -120,5 +122,25 @@ class TagController extends Controller
         }else{
             return response()->json(["error" => "Erro ao deletar Tag"]);
         }
+    }
+
+
+    public function exportar()
+    {
+
+        $tag = $this->index();
+
+        $pdf = PDF::loadView('relatorio.pdf', ['tags' => $tag]);
+        // return $pdf->download('tags.pdf');
+        $pdf->save(storage_path('app/public/tags.pdf'));
+        // return storage_path('app/public/tags.pdf');
+    }
+
+    public function getDownload()
+    {
+        $this->exportar();
+        $file= Storage::url('tags.pdf');
+        return $file;
+        
     }
 }

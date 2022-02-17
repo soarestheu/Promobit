@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6">
         <h4>
-          Listagem de Produtos
+          Listagem de Produtos 
         </h4>
         <ul class="list-group">
           <li class="list-group-item"
